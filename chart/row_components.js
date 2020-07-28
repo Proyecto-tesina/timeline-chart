@@ -1,23 +1,23 @@
 class RowComponent {
     constructor(data) {
         this.data = data;
-        this.data.forEach((data) => data[0] = new Date(data[0]));
+        this.data.forEach(data => data.timestamp = new Date(data.timestamp));
     }
 
     remove_description(data) {
-        return data.map(e => e[0])
+        return data.map(event => event.timestamp)
     }
 }
 
 class CameraDetectionComponent extends RowComponent {
 
     detections() {
-        let detections = this.data.filter((data) => data[1] == 'I see you');
+        let detections = this.data.filter((data) => data.status == 'I see you');
         return this.remove_description(detections);
     }
 
     non_detections() {
-        let non_detections = this.data.filter((data) => data[1] == 'I don\'t see you');
+        let non_detections = this.data.filter((data) => data.status == 'I don\'t see you');
         return this.remove_description(non_detections);
     }
 
@@ -48,12 +48,12 @@ class CameraDetectionComponent extends RowComponent {
 class DrtMonitorComponent extends RowComponent {
 
     drt_on_intervals() {
-        let drts_on = this.data.filter((data) => data[1] != "mistake");
+        let drts_on = this.data.filter((data) => data.status != "mistake");
         return this.remove_description(drts_on);
     }
 
     mistakes() {
-        let mistakes = this.data.filter((data) => data[1] == "mistake");
+        let mistakes = this.data.filter((data) => data.status == "mistake");
         return this.remove_description(mistakes);
     }
 
@@ -70,6 +70,7 @@ class DrtMonitorComponent extends RowComponent {
             rows.push([description, name, start, end]);
         }
 
+        // rows.pop() // TODO: Quick fix for not symetric event of start and finish DRT
         return rows;
     }
 
@@ -89,10 +90,10 @@ class PlayerActionComponent extends RowComponent {
     player_actions_row() {
         return this.data.map(
             (data) => [
-                data[1],
-                data[1],
-                data[0],
-                data[0]
+                data.status,
+                data.status,
+                data.timestamp,
+                data.timestamp
             ]
         );
     }
