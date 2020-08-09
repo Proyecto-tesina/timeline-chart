@@ -9,15 +9,15 @@ class RowComponent {
     }
 }
 
-class CameraDetectionComponent extends RowComponent {
+export class CameraDetectionComponent extends RowComponent {
 
     detections() {
-        let detections = this.data.filter((data) => data.status == 'I see you');
+        let detections = this.data.filter((data) => data.status === 'I see you');
         return this.remove_description(detections);
     }
 
     non_detections() {
-        let non_detections = this.data.filter((data) => data.status == 'I don\'t see you');
+        let non_detections = this.data.filter((data) => data.status === 'I don\'t see you');
         return this.remove_description(non_detections);
     }
 
@@ -33,7 +33,7 @@ class CameraDetectionComponent extends RowComponent {
         return this.non_detections().map(
             (non_detection, i) => [
                 'Distraction time',
-                'Camera NO detection' + ' ' + i,
+                `Camera NO detection ${i}`,
                 non_detection,
                 this.next_detection(non_detection)
             ]
@@ -45,15 +45,15 @@ class CameraDetectionComponent extends RowComponent {
     }
 }
 
-class DrtMonitorComponent extends RowComponent {
+export class DrtMonitorComponent extends RowComponent {
 
     drt_on_intervals() {
-        let drts_on = this.data.filter((data) => data.status != "mistake");
+        let drts_on = this.data.filter((data) => data.status !== "mistake");
         return this.remove_description(drts_on);
     }
 
     mistakes() {
-        let mistakes = this.data.filter((data) => data.status == "mistake");
+        let mistakes = this.data.filter((data) => data.status === "mistake");
         return this.remove_description(mistakes);
     }
 
@@ -63,7 +63,7 @@ class DrtMonitorComponent extends RowComponent {
         var rows = [];
         for (var i = 0; i < drts_on.length; i += 2) {
             let description = 'DRT on';
-            let name = 'Light' + ' ' + i / 2;
+            let name = `Light ${i / 2}`;
             let start = drts_on[i];
             let end = drts_on[i + 1];
 
@@ -76,7 +76,7 @@ class DrtMonitorComponent extends RowComponent {
 
     mistakes_row() {
         return this.mistakes().map(
-            (mistake, i) => ['Mistakes', 'Mistake' + ' ' + i, mistake, mistake]
+            (mistake, i) => ['Mistakes', `Mistake ${i}`, mistake, mistake]
         );
     }
 
@@ -85,7 +85,7 @@ class DrtMonitorComponent extends RowComponent {
     }
 }
 
-class PlayerActionComponent extends RowComponent {
+export class PlayerActionComponent extends RowComponent {
 
     player_actions_row() {
         return this.data.map(

@@ -1,0 +1,10 @@
+.Body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #f1faee;
+  border-top: 2em solid #1d3557;
+  border-bottom: 2em solid #1d3557;
+}
