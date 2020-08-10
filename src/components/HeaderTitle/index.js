@@ -4,11 +4,11 @@ import './styles.css';
 
 
 class HeaderTitle extends Component {
-	
+    
   render() {
     return (
       <h1 className="HeaderTitle">
-      	Experiment statistics
+        Experiment statistics
       </h1>
     );
   }

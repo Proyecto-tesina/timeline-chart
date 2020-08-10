@@ -9,7 +9,7 @@ class Body extends Component {
   render() {
     return (
       <div className="Body">
-      	<ChartContainer />
+        <ChartContainer />
       </div>
     );
   }

@@ -2,90 +2,66 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-import Chart from "react-google-charts";
-
 import * as http from 'helpers/http.js'
-import ExperimentChart from 'helpers/chart.js'
 
-import ErrorMessage from 'components/ErrorMessage/index.js'
+import ChartHeader from 'components/ChartHeader/index.js'
+import ChartBody from 'components/ChartBody/index.js'
 
 
 class ChartContainer extends Component {
 
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-            chartData: [],
-            error: false,
-            isLoaded: false
-		}
-	}
-
-    async componentDidMount() {
-        try {
-            let lastExperiment = await http.lastExperiment();
-            let chart = new ExperimentChart(lastExperiment);
-
-            this.setState({            
-                chartData: chart.data(),
-                isLoaded: true
-            });
-        } catch(error) {
-            console.error('Failed to fetch experiments: ', error);
-
-            this.setState({
-                error: true,
-                isLoaded: true
-            })
-        }
+    this.state = {
+      currentExperiment: null,
+      error: false,
+      isLoaded: false,
     }
+  }
 
-	render() {
-        const loadMessage = 'Cargando . . .';
+  componentDidMount() {
+    this.loadExperiment(http.lastExperimentUrl);
+  }
 
-        const errorMessage = <ErrorMessage 
-            text='Ha ocurrido un error al cargar los experimentos.'
-        />;
+  async loadExperiment(url) {
+    try {
+      let response = await http.get(url);
 
-        const chart = <Chart
-            height='100%'
-            width='100%'
-            className="Chart"
-            chartType="Timeline"
-            loader={<div>Cargando . . .</div>}
-            data={this.state.chartData}
-            options={{
-                    vAxis: {
-                        title: 'Experiment Statistics'
-                    },
-                    timeline: {
-                        showBarLabels: false,
-                        colorByRowLabel: true,
-                    },
-                    hAxis: {
-                        format: 'HH:mm:ss'
-                    },
-                    avoidOverlappingGridLines: false,
-            }}
-        />;
+      this.setState({
+        nextExperiment: response.next,
+        currentExperiment: response.results[0],
+        previousExperiment: response.previous,
+        isLoaded: true
+      });
+    } catch (error) {
+      console.error('Failed to fetch experiments: ', error);
 
-        let content;
+      this.setState({
+        error: true,
+        isLoaded: true
+      })
+    }
+  }
 
-        if (!this.state.isLoaded) {
-            content = loadMessage;
-        } else if (this.state.error) {
-            content = errorMessage;
-        } else {
-            content = chart;
-        }
-
-		return (
-			<div className="ChartContainer">
-                {content}		
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className="ChartContainer">
+        <ChartHeader
+            experiment={this.state.currentExperiment} 
+            nextExperiment={this.state.nextExperiment} 
+            previousExperiment={this.state.previousExperiment} 
+            loadExperiment={this.loadExperiment.bind(this)}                     
+        />
+        
+        <ChartBody 
+            experiment={this.state.currentExperiment}
+            error={this.state.error}
+            isLoaded={this.state.isLoaded}
+        />                    
+      </div>
+    );
+  }
 }
 
 export default ChartContainer;
