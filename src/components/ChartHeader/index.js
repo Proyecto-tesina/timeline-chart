@@ -10,16 +10,16 @@ class ChartHeader extends Component {
 
   render() {
     const experiment = this.props.experiment;
-    const previousExperiment = this.props.previousExperiment;
-    const nextExperiment = this.props.nextExperiment;
+    const previousUrl = this.props.previousUrl;
+    const nextUrl = this.props.nextUrl;
 
   	if (experiment === null) return null;
 
     return (
       <div className="ChartHeader">
       	<PaginationButton
-          loadExperiment={this.props.loadExperiment}
-          url={previousExperiment}
+          updateExperiment={this.props.updateExperiment}
+          url={previousUrl}
           text='Previous'          
         />
 
@@ -28,8 +28,8 @@ class ChartHeader extends Component {
         />
 
       	<PaginationButton           
-          loadExperiment={this.props.loadExperiment}
-          url={nextExperiment}
+          updateExperiment={this.props.updateExperiment}
+          url={nextUrl}
           text='Next'
         />
       </div>

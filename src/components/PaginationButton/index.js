@@ -9,7 +9,7 @@ class PaginationButton extends Component {
     const url = this.props.url;
 
     if (url === null) return;
-    this.props.loadExperiment(url);
+    this.props.updateExperiment(url);
   }
 
   render() {

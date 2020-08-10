@@ -14,24 +14,38 @@ class ChartContainer extends Component {
     super(props);
 
     this.state = {
-      currentExperiment: null,
+      experiment: null,
+      nextUrl: '',
+      previousUrl: '',
+      currentUrl: http.lastExperimentUrl,
       error: false,
       isLoaded: false,
     }
   }
 
   componentDidMount() {
-    this.loadExperiment(http.lastExperimentUrl);
+    this.loadExperiment();
+
+    setInterval(this.loadExperiment.bind(this), 1000);
   }
 
-  async loadExperiment(url) {
+  updateExperiment(url) {
+    this.setState(
+      {currentUrl: url}, 
+      this.loadExperiment
+    );
+  }
+
+  async loadExperiment() {
     try {
+      let url = this.state.currentUrl;
       let response = await http.get(url);
 
       this.setState({
-        nextExperiment: response.next,
-        currentExperiment: response.results[0],
-        previousExperiment: response.previous,
+        nextUrl: response.next,
+        previousUrl: response.previous,
+        experiment: response.results[0],
+        error: false,
         isLoaded: true
       });
     } catch (error) {
@@ -44,18 +58,19 @@ class ChartContainer extends Component {
     }
   }
 
+
   render() {
     return (
       <div className="ChartContainer">
         <ChartHeader
-            experiment={this.state.currentExperiment} 
-            nextExperiment={this.state.nextExperiment} 
-            previousExperiment={this.state.previousExperiment} 
-            loadExperiment={this.loadExperiment.bind(this)}                     
+            experiment={this.state.experiment} 
+            nextUrl={this.state.nextUrl} 
+            previousUrl={this.state.previousUrl} 
+            updateExperiment={this.updateExperiment.bind(this)}
         />
         
         <ChartBody 
-            experiment={this.state.currentExperiment}
+            experiment={this.state.experiment}
             error={this.state.error}
             isLoaded={this.state.isLoaded}
         />                    
