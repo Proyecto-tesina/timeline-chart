@@ -4,6 +4,8 @@ import './styles.css';
 
 import * as http from 'helpers/http.js'
 
+import ErrorMessage from 'components/ErrorMessage/index.js'
+import Loader from 'components/Loader/index.js'
 import ChartHeader from 'components/ChartHeader/index.js'
 import ChartBody from 'components/ChartBody/index.js'
 
@@ -30,15 +32,15 @@ class ChartContainer extends Component {
   }
 
   updateExperiment(url) {
-    this.setState(
-      {currentUrl: url}, 
+    this.setState({ currentUrl: url },
       this.loadExperiment
     );
   }
 
   async loadExperiment() {
+    let url = this.state.currentUrl;
+
     try {
-      let url = this.state.currentUrl;
       let response = await http.get(url);
 
       this.setState({
@@ -60,22 +62,32 @@ class ChartContainer extends Component {
 
 
   render() {
-    return (
-      <div className="ChartContainer">
-        <ChartHeader
-            experiment={this.state.experiment} 
-            nextUrl={this.state.nextUrl} 
-            previousUrl={this.state.previousUrl} 
+    if (!this.state.isLoaded) {
+      return <Loader />;
+
+    } else if (this.state.error || !this.state.experiment) {
+      return <ErrorMessage
+        text='Ha ocurrido un error al cargar los experimentos.'
+      />;
+
+    } else {
+      return (
+        <div className="ChartContainer">
+          <ChartHeader
+            experiment={this.state.experiment}
+            nextUrl={this.state.nextUrl}
+            previousUrl={this.state.previousUrl}
             updateExperiment={this.updateExperiment.bind(this)}
-        />
-        
-        <ChartBody 
+          />
+
+          <ChartBody
             experiment={this.state.experiment}
             error={this.state.error}
             isLoaded={this.state.isLoaded}
-        />                    
-      </div>
-    );
+          />
+        </div>
+      );
+    }
   }
 }
 
