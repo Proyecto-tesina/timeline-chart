@@ -70,7 +70,7 @@ export class DrtMonitorComponent extends RowComponent {
             rows.push([description, name, start, end]);
         }
 
-        // rows.pop() // TODO: Quick fix for not symetric event of start and finish DRT
+        rows.pop() // TODO: Quick fix for not symetric event of start and finish DRT
         return rows;
     }
 
