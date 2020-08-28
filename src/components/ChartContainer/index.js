@@ -17,29 +17,31 @@ class ChartContainer extends Component {
       experiment: null,
       nextUrl: '',
       previousUrl: '',
-      currentUrl: http.lastExperimentUrl,
+      currentUrl: '',
       error: false,
       isLoaded: false,
     }
   }
 
   componentDidMount() {
-    this.loadExperiment();
+    const url = http.lastExperimentUrl;
 
-    setInterval(this.loadExperiment.bind(this), 1000);
+    this.updateExperiment(url);
+
+    setInterval(this.fetchExperiment.bind(this), 1000);
   }
 
   updateExperiment(url) {
     this.setState(
       {currentUrl: url}, 
-      this.loadExperiment
+      this.fetchExperiment
     );
   }
 
-  async loadExperiment() {
+  async fetchExperiment() {
     try {
-      let url = this.state.currentUrl;
-      let response = await http.get(url);
+      const url = this.state.currentUrl;
+      const response = await http.get(url);
 
       this.setState({
         nextUrl: response.next,

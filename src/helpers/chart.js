@@ -35,9 +35,11 @@ export default class ExperimentChart {
 	}
 
 	rows() {
-		return this.rowComponents.flatMap(
-			(component) => component.rows().flat()
+		const rows = this.rowComponents.flatMap(
+			(component) => component.rows()
 		);
+
+		return rows;
 	}
 
 	data() {

@@ -1,104 +1,143 @@
+import { Event } from 'helpers/events.js';
+
 class RowComponent {
+
     constructor(data) {
         this.data = data;
-        this.data.forEach(data => data.timestamp = new Date(data.timestamp));
+
+        this.data.forEach(
+            data => data.timestamp = new Date(data.timestamp)
+        );
     }
 
-    remove_description(data) {
-        return data.map(event => event.timestamp)
+    rows() {
+        const events = this.events();
+
+        return events.map(event => [
+            event.name,
+            event.description,
+            event.startTimestamp(),
+            event.endTimestamp()
+        ])
     }
 }
 
 export class CameraDetectionComponent extends RowComponent {
 
     detections() {
-        let detections = this.data.filter((data) => data.status === 'I see you');
-        return this.remove_description(detections);
+        return this.data.filter((data) => data.status === 'I see you');
     }
 
-    non_detections() {
-        let non_detections = this.data.filter((data) => data.status === 'I don\'t see you');
-        return this.remove_description(non_detections);
+    nonDetections() {
+        return this.data.filter((data) => data.status === 'I don\'t see you');
     }
 
-    next_detection(non_detection) {
-        let next_detections = this.detections().filter(
-            (detection) => detection >= non_detection
+    nextDetection(nonDetection) {
+        const detections = this.detections();
+
+        const nextDetections = detections.filter(
+            (detection) => detection.timestamp >= nonDetection.timestamp
         )
 
-        return next_detections.length ? next_detections[0] : non_detection
+        return nextDetections.length ? nextDetections[0] : nonDetection
     }
 
-    distraction_row() {
-        return this.non_detections().map(
-            (non_detection, i) => [
-                'Distraction time',
-                `Camera NO detection ${i}`,
-                non_detection,
-                this.next_detection(non_detection)
-            ]
+    distractionEvents() {
+        const name = 'Distraction time';
+        const description = 'Camera NO detection';
+
+        const nonDetections = this.nonDetections();
+
+
+        const events = nonDetections.map(
+            (nonDetectionEvent, index) => new Event({
+                name: name,
+                description: `${description} ${index}`,
+                startEvent: nonDetectionEvent,
+                endEvent: this.nextDetection(nonDetectionEvent)
+            })
         );
+
+        return events
     }
 
-    rows() {
-        return [this.distraction_row()];
+    events() {
+        const distractionEvents = this.distractionEvents();
+
+        return distractionEvents;
     }
 }
 
 export class DrtMonitorComponent extends RowComponent {
 
-    drt_on_intervals() {
-        let drts_on = this.data.filter((data) => data.status !== "mistake");
-        return this.remove_description(drts_on);
+    drtsOn() {
+        return this.data.filter((data) => data.status !== "mistake");
+    }
+
+    drtEvents() {
+        const name = 'Light';
+        const description = 'DRT on';
+        const events = [];
+
+        const drtsOn = this.drtsOn();
+
+        for (var i = 0; i < drtsOn.length; i += 2) {
+            const event = new Event({
+                name: description,
+                description: `${name} ${i / 2}`,
+                startEvent: drtsOn[i],
+                endEvent: drtsOn[i + 1]
+            });
+
+            events.push(event);
+        }
+
+        return events;
     }
 
     mistakes() {
-        let mistakes = this.data.filter((data) => data.status === "mistake");
-        return this.remove_description(mistakes);
+        return this.data.filter((data) => data.status === "mistake");
     }
 
-    drt_on_row() {
-        let drts_on = this.drt_on_intervals()
+    mistakeEvents() {
+        const mistakes = this.mistakes();
 
-        var rows = [];
-        for (var i = 0; i < drts_on.length; i += 2) {
-            let description = 'DRT on';
-            let name = `Light ${i / 2}`;
-            let start = drts_on[i];
-            let end = drts_on[i + 1];
-
-            rows.push([description, name, start, end]);
-        }
-
-        // rows.pop() // TODO: Quick fix for not symetric event of start and finish DRT
-        return rows;
-    }
-
-    mistakes_row() {
-        return this.mistakes().map(
-            (mistake, i) => ['Mistakes', `Mistake ${i}`, mistake, mistake]
+        const events = mistakes.map(
+            (mistake, i) => new Event({
+                name: 'Mistakes',
+                description: `Mistake ${i}`,
+                startEvent: mistake,
+                endEvent: mistake
+            })
         );
+
+        return events
     }
 
-    rows() {
-        return [this.drt_on_row(), this.mistakes_row()]
+    events() {
+        const drtEvents = this.drtEvents();
+        const mistakeEvents = this.mistakeEvents();
+
+        return drtEvents.concat(mistakeEvents);
     }
 }
 
 export class PlayerActionComponent extends RowComponent {
 
-    player_actions_row() {
-        return this.data.map(
-            (data) => [
-                data.status,
-                data.status,
-                data.timestamp,
-                data.timestamp
-            ]
+    playerActionEvents() {
+        const events = this.data.map(
+            (event) => new Event({
+                name: event.status,
+                description: event.status,
+                startEvent: event,
+                endEvent: event
+            })
         );
+
+        return events
     }
 
-    rows() {
-        return [this.player_actions_row()]
+    events() {
+        return this.playerActionEvents()
     }
 }

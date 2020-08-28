@@ -9,9 +9,7 @@ import ChartTitle from 'components/ChartTitle/index.js'
 class ChartHeader extends Component {
 
   render() {
-    const experiment = this.props.experiment;
-    const previousUrl = this.props.previousUrl;
-    const nextUrl = this.props.nextUrl;
+    const { experiment, previousUrl, nextUrl } = this.props;
 
   	if (experiment === null) return null;
 
@@ -24,7 +22,7 @@ class ChartHeader extends Component {
         />
 
         <ChartTitle
-          experiment = {experiment}
+          experiment={experiment}
         />
 
       	<PaginationButton           
