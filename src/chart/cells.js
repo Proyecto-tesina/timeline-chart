@@ -1,4 +1,4 @@
-export class Event {
+export class Cell {
 
     constructor({name, description, startEvent, endEvent}) {
         this.name = name;

@@ -7,7 +7,7 @@ import Chart from "react-google-charts";
 import ErrorMessage from 'components/ErrorMessage/index.js'
 import Loader from 'components/Loader/index.js'
 
-import ExperimentChart from 'helpers/chart.js'
+import ExperimentChart from 'chart/chart.js'
 
 
 class ChartBody extends Component {
