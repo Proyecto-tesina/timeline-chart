@@ -96,16 +96,16 @@ export class DrtMonitorRow extends Row {
     }
 
     drtCells() {
-        const name = 'Light';
-        const description = 'DRT on';
+        const name = 'DRT on';
+        const description = 'Light';
         const cells = [];
 
         const drtsOnEvents = this.drtsOnEvents();
 
         for (var i = 0; i < drtsOnEvents.length; i += 2) {
             const cell = new Cell({
-                name: description,
-                description: `${name} ${i / 2}`,
+                name: name,
+                description: `${description} ${i / 2}`,
                 startEvent: drtsOnEvents[i],
                 endEvent: drtsOnEvents[i + 1],
                 chart: this.chart
