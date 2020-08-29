@@ -13,11 +13,27 @@ export default class ExperimentChart {
 	constructor(experiment) {
 		this.experiment = experiment;
 
+        this.experiment.events.forEach(
+            experiment => experiment.timestamp = new Date(experiment.timestamp)
+        );
+
 		this.rows = [
-			new DrtMonitorRow(experiment),
-			new CameraDetectionRow(experiment),
-			new PlayerActionRow(experiment)
+			new DrtMonitorRow(this),
+			new CameraDetectionRow(this),
+			new PlayerActionRow(this)
 		];
+	}
+
+	endTime() {
+		const endTimeExperiment = this.experiment.ended_at;
+
+		return new Date(endTimeExperiment)
+	}
+
+	isFinished() {
+		const endTimeExperiment = this.experiment.ended_at;
+
+		return endTimeExperiment !== null
 	}
 
 	columns() {
@@ -28,6 +44,8 @@ export default class ExperimentChart {
 		const rows = this.rows.flatMap(
 			(row) => row.elements()
 		);
+
+		console.log(rows)
 
 		return rows;
 	}

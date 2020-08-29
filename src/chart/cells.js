@@ -1,10 +1,11 @@
 export class Cell {
 
-    constructor({name, description, startEvent, endEvent}) {
+    constructor({name, description, startEvent, endEvent, chart}) {
         this.name = name;
         this.description = description;
         this.startEvent = startEvent;
         this.endEvent = endEvent;
+        this.chart = chart;
     }
 
     missingEndEvent() {
@@ -23,6 +24,9 @@ export class Cell {
 
         if (!this.missingEndEvent())            
             return this.endEvent.timestamp;
+
+        if (this.chart.isFinished())
+            return this.chart.endTime()
         
         if (this.timedOutStartEvent()){
             return this.startEvent.timestamp;

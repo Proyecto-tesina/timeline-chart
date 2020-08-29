@@ -30,7 +30,7 @@ class ChartBody extends Component {
           width='100%'
           className="Chart"
           chartType="Timeline"
-          loader={<div>Cargando . . .</div>}
+          loader={<Loader />}
           data={chart.data()}
           options={{
                   vAxis: {

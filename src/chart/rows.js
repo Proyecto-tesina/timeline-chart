@@ -2,11 +2,9 @@ import { Cell } from 'chart/cells.js';
 
 class Row {
 
-    constructor(experiment) {
-        this.experiment = experiment;
-        this.experiment.events.forEach(
-            experiment => experiment.timestamp = new Date(experiment.timestamp)
-        );        
+    constructor(chart) {
+        this.chart = chart
+        this.experiment = chart.experiment;
     }
 
     getEventsByStatus(eventStatus) {
@@ -35,8 +33,8 @@ class Row {
 
 export class CameraDetectionRow extends Row {
 
-    constructor(experiment) {
-        super(experiment);
+    constructor(chart) {
+        super(chart);
 
         this.events = this.getEventsByName('CAMERA');
     }
@@ -70,7 +68,8 @@ export class CameraDetectionRow extends Row {
                 name: name,
                 description: `${description} ${index}`,
                 startEvent: nonDetectionEvent,
-                endEvent: this.nextDetection(nonDetectionEvent)
+                endEvent: this.nextDetection(nonDetectionEvent),
+                chart: this.chart
             })
         );
 
@@ -86,8 +85,8 @@ export class CameraDetectionRow extends Row {
 
 export class DrtMonitorRow extends Row {
 
-    constructor(experiment) {
-        super(experiment);
+    constructor(chart) {
+        super(chart);
 
         this.events = this.getEventsByName('DRT');
     }
@@ -108,7 +107,8 @@ export class DrtMonitorRow extends Row {
                 name: description,
                 description: `${name} ${i / 2}`,
                 startEvent: drtsOnEvents[i],
-                endEvent: drtsOnEvents[i + 1]
+                endEvent: drtsOnEvents[i + 1],
+                chart: this.chart
             });
 
             cells.push(cell);
@@ -129,7 +129,8 @@ export class DrtMonitorRow extends Row {
                 name: 'Mistakes',
                 description: `Mistake ${index}`,
                 startEvent: mistake,
-                endEvent: mistake
+                endEvent: mistake,
+                chart: this.chart
             })
         );
 
@@ -146,8 +147,8 @@ export class DrtMonitorRow extends Row {
 
 export class PlayerActionRow extends Row {
 
-    constructor(experiment) {
-        super(experiment);
+    constructor(chart) {
+        super(chart);
 
         this.events = this.getEventsByName('PLAYER');
     }
@@ -158,7 +159,8 @@ export class PlayerActionRow extends Row {
                 name: event.status,
                 description: event.status,
                 startEvent: event,
-                endEvent: event
+                endEvent: event,
+                chart: this.chart
             })
         );
 
