@@ -48,7 +48,6 @@ export class CameraDetectionComponent extends RowComponent {
 
         const nonDetections = this.nonDetections();
 
-
         const events = nonDetections.map(
             (nonDetectionEvent, index) => new Event({
                 name: name,
@@ -71,7 +70,9 @@ export class CameraDetectionComponent extends RowComponent {
 export class DrtMonitorComponent extends RowComponent {
 
     drtsOn() {
-        return this.data.filter((data) => data.status !== "mistake");
+        return this.data.filter((data) => 
+            data.status === "start" || data.status === "end"
+        );
     }
 
     drtEvents() {

@@ -34,14 +34,14 @@ class ChartBody extends Component {
           data={chart.data()}
           options={{
                   vAxis: {
-                      title: 'Experiment Statistics'
+                      title: 'Experiment Statistics',
                   },
                   timeline: {
                       showBarLabels: false,
                       colorByRowLabel: true,
                   },
                   hAxis: {
-                      format: 'HH:mm:ss'
+                      format: 'HH:mm:ss',
                   },
                   avoidOverlappingGridLines: false,
           }}

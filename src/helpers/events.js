@@ -11,11 +11,11 @@ export class Event {
         return this.endEvent === undefined
     }
 
-    timePassedFromStartEvent() {
+    timedOutStartEvent() {
         const nowTimestamp = new Date(Date.now());
-        const timePassed = 300000;
+        const timeout = 300000;
 
-        return (nowTimestamp - this.startEvent.timestamp) > timePassed
+        return (nowTimestamp - this.startEvent.timestamp) > timeout
     }
 
     endTimestamp() {
@@ -24,8 +24,9 @@ export class Event {
         if (!this.missingEndEvent())            
             return this.endEvent.timestamp;
         
-        if (this.timePassedFromStartEvent())
+        if (this.timedOutStartEvent()){
             return this.startEvent.timestamp;
+        }
 
         return nowTimestamp
     }
