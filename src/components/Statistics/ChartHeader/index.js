@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-import PaginationButton from 'components/PaginationButton/index.js'
-import ChartTitle from 'components/ChartTitle/index.js'
+import PaginationButton from '../PaginationButton/index.js'
+import ChartTitle from '../ChartTitle/index.js'
 
 
 class ChartHeader extends Component {

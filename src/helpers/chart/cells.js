@@ -28,9 +28,8 @@ export class Cell {
         if (this.chart.isFinished())
             return this.chart.endTime()
         
-        if (this.timedOutStartEvent()){
+        if (this.timedOutStartEvent())
             return this.startEvent.timestamp;
-        }
 
         return nowTimestamp
     }

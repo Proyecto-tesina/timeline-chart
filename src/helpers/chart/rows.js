@@ -1,4 +1,4 @@
-import { Cell } from 'chart/cells.js';
+import { Cell } from './cells.js';
 
 class Row {
 

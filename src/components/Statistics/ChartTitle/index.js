@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-import ExperimentStatus from 'components/ExperimentStatus/index.js'
+import ExperimentStatus from '../ExperimentStatus/index.js'
 
 
 class ChartTitle extends Component {

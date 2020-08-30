@@ -7,8 +7,8 @@ class HeaderTitle extends Component {
     
   render() {
     return (
-      <h1 className="HeaderTitle">
-        Experiment statistics
+      <h1 className="H1">
+        {this.props.children}
       </h1>
     );
   }

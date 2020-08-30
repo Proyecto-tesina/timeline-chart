@@ -1,4 +1,7 @@
-import { CameraDetectionRow, PlayerActionRow, DrtMonitorRow } from "chart/rows.js";
+import { CameraDetectionRow, 
+	PlayerActionRow, 
+	DrtMonitorRow 
+} from "./rows.js";
 
 
 const COLUMNS = [

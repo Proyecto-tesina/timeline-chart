@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-import * as http from 'helpers/http.js'
+import * as http from 'helpers/api/http.js'
 
-import ChartHeader from 'components/ChartHeader/index.js'
-import ChartBody from 'components/ChartBody/index.js'
+import ChartHeader from '../ChartHeader/index.js'
+import ChartBody from '../ChartBody/index.js'
 
 
 class ChartContainer extends Component {
