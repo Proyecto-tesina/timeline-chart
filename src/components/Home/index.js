@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
+import HomeImage from './HomeImage/index.js'
+import HomeLinks from './HomeLinks/index.js'
+
 
 class Home extends Component {
   render() {
     return (
-      <div>
-        Home
+      <div className="Home">
+        <HomeImage />
+
+        <HomeLinks />
       </div>
     );
   }

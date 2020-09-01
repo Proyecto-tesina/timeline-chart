@@ -17,14 +17,18 @@ class App extends Component {
 
     return (
       <Router>
-        <Switch>
-          <Route path="/statistics">
-            <Statistics />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+        <div className="App">
+
+          <Switch>
+            <Route path="/statistics">
+              <Statistics />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+          
+        </div>
       </Router>
     );
   }

@@ -12,15 +12,15 @@ import ChartContainer from './ChartContainer/index.js'
 class Stadistics extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="Stadistics">
         <Header>
-	        <H1>
-	          Experiment statistics
-	        </H1>
+          <H1>
+            Experiment statistics
+          </H1>
         </Header>
 
         <Body> 
-        	<ChartContainer />
+          <ChartContainer />
         </Body>
       </div>
     );

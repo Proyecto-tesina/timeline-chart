@@ -1,0 +1,15 @@
+.Home {
+    display: flex;
+    border-bottom-right-radius: 3em;
+    border-top-left-radius: 3em;
+    width: 40%;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #1d3d5d;
+    height: 70%;
+    flex-direction: column;
+
+    box-shadow: #2c536b 0px 0px 20px;
+    -moz-box-shadow: #2c536b 0px 0px 20px;
+    -webkit-box-shadow: #2c536b 0px 0px 20px;
+}
