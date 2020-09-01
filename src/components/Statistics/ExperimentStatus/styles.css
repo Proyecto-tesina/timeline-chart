@@ -1,0 +1,15 @@
+.ExperimentStatus {
+	color: #a8dadc;
+}
+
+.ExperimentStatus > .finished {
+	color: red;
+}
+
+.ExperimentStatus > .running {
+	color: #00ff00;
+}
+
+.ExperimentStatus > .pending {
+	color: white;
+}

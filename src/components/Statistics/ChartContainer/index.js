@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-import * as http from 'helpers/http.js'
+import * as http from 'helpers/api/http.js'
 
-import ErrorMessage from 'components/ErrorMessage/index.js'
-import Loader from 'components/Loader/index.js'
-import ChartHeader from 'components/ChartHeader/index.js'
-import ChartBody from 'components/ChartBody/index.js'
+import ErrorMessage from 'domain/ErrorMessage/index.js'
+import Loader from 'domain/Loader/index.js'
+import ChartHeader from 'components/Statistics/ChartHeader/index.js'
+import ChartBody from 'components/Statistics/ChartBody/index.js'
 
 
 class ChartContainer extends Component {
@@ -19,29 +19,31 @@ class ChartContainer extends Component {
       experiment: null,
       nextUrl: '',
       previousUrl: '',
-      currentUrl: http.lastExperimentUrl,
+      currentUrl: '',
       error: false,
       isLoaded: false,
     }
   }
 
   componentDidMount() {
-    this.loadExperiment();
+    const url = http.lastExperimentUrl;
 
-    setInterval(this.loadExperiment.bind(this), 1000);
+    this.updateExperiment(url);
+
+    setInterval(this.fetchExperiment.bind(this), 1000);
   }
 
   updateExperiment(url) {
-    this.setState({ currentUrl: url },
-      this.loadExperiment
+    this.setState(
+      { currentUrl: url },
+      this.fetchExperiment
     );
   }
 
-  async loadExperiment() {
-    let url = this.state.currentUrl;
-
+  async fetchExperiment() {
     try {
-      let response = await http.get(url);
+      const url = this.state.currentUrl;
+      const response = await http.get(url);
 
       this.setState({
         nextUrl: response.next,

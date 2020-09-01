@@ -1,18 +1,35 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Header from 'components/Header/index.js'
-import Body from 'components/Body/index.js'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import Home from 'components/Home/index.js';
+import Statistics from 'components/Statistics/index.js';
+
 
 class App extends Component {
 
   render(){
 
     return (
-    <div className="App">
-      <Header />
-      <Body />
-    </div>
+      <Router>
+        <div className="App">
+
+          <Switch>
+            <Route path="/statistics">
+              <Statistics />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+
+        </div>
+      </Router>
     );
   }
 }

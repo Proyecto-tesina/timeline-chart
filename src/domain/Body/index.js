@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import './styles.css';
 
 
-class Loader extends Component {
+class Body extends Component {
   render() {
     return (
-      <div>
-      	<span> Cargando . . . </span>
+      <div className="Body">
+        {this.props.children}
       </div>
     );
   }
 }
 
-export default Loader;
+export default Body;

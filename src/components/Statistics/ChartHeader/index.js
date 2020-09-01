@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 
 import './styles.css';
 
-import PaginationButton from 'components/PaginationButton/index.js'
-import ChartTitle from 'components/ChartTitle/index.js'
+import PaginationButton from '../PaginationButton/index.js'
+import ChartTitle from '../ChartTitle/index.js'
 
 
 class ChartHeader extends Component {
 
   render() {
-    const experiment = this.props.experiment;
-    const previousUrl = this.props.previousUrl;
-    const nextUrl = this.props.nextUrl;
+    const { experiment, previousUrl, nextUrl } = this.props;
 
     return (
       <div className="ChartHeader">

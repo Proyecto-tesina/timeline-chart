@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './styles.css';
 
 import Chart from "react-google-charts";
-import ExperimentChart from 'helpers/chart.js'
+import ExperimentChart from 'helpers/chart/chart.js'
 
 
 class ChartBody extends Component {
