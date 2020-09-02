@@ -5,6 +5,8 @@ import './styles.css';
 import Chart from "react-google-charts";
 import ExperimentChart from 'helpers/chart/chart.js'
 
+import Loader from 'domain/Loader/index.js'
+
 
 class ChartBody extends Component {
 
@@ -17,7 +19,7 @@ class ChartBody extends Component {
       width='100%'
       className="Chart"
       chartType="Timeline"
-      loader={<div>Cargando . . .</div>}
+      loader={<Loader />}
       data={chart.data()}
       options={{
         vAxis: {
