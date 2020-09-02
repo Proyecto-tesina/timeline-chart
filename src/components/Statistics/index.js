@@ -9,7 +9,7 @@ import H1 from 'domain/H1/index.js'
 import ChartContainer from './ChartContainer/index.js'
 
 
-class Stadistics extends Component {
+class Statistics extends Component {
   render() {
     return (
       <div className="Stadistics">
@@ -19,7 +19,7 @@ class Stadistics extends Component {
           </H1>
         </Header>
 
-        <Body> 
+        <Body>
           <ChartContainer />
         </Body>
       </div>
@@ -27,4 +27,4 @@ class Stadistics extends Component {
   }
 }
 
-export default Stadistics;
+export default Statistics;

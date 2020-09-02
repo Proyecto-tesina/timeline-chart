@@ -8,4 +8,3 @@ export async function get(url) {
 
     return json;
 }
-

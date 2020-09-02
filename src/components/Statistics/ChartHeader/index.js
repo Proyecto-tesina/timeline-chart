@@ -11,21 +11,19 @@ class ChartHeader extends Component {
   render() {
     const { experiment, previousUrl, nextUrl } = this.props;
 
-  	if (experiment === null) return null;
-
     return (
       <div className="ChartHeader">
-      	<PaginationButton
+        <PaginationButton
           updateExperiment={this.props.updateExperiment}
           url={previousUrl}
-          text='Previous'          
+          text='Previous'
         />
 
         <ChartTitle
           experiment={experiment}
         />
 
-      	<PaginationButton           
+        <PaginationButton
           updateExperiment={this.props.updateExperiment}
           url={nextUrl}
           text='Next'
