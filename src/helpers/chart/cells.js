@@ -1,11 +1,25 @@
 export class Cell {
+    static colors = {
+            "Light lost" : "red",
+            "default" : "",
+    };
 
     constructor({name, description, startEvent, endEvent, chart}) {
+
         this.name = name;
         this.description = description;
         this.startEvent = startEvent;
         this.endEvent = endEvent;
         this.chart = chart;
+    }
+
+    color() {
+        const { description } = this;
+        const { colors } = Cell;
+
+        const hasColor = description in colors;
+
+        return hasColor ? colors[description] : colors.default;
     }
 
     missingEndEvent() {

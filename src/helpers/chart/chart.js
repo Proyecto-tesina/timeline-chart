@@ -7,6 +7,7 @@ import { CameraDetectionRow,
 const COLUMNS = [
 	{ type: 'string',	id: 'Description' }, 
 	{ type: 'string',	id: 'Name' }, 
+	{ type: 'string', id: 'style', role: 'style' },
 	{ type: 'date', id: 'Start' }, 
 	{ type: 'date', id: 'End'} , 
 ]

@@ -28,7 +28,7 @@ class ChartContainer extends Component {
 
     this.updateExperiment(url);
 
-    setInterval(this.fetchExperiment.bind(this), 1000);
+    setInterval(this.fetchExperiment.bind(this), 100);
   }
 
   updateExperiment(url) {

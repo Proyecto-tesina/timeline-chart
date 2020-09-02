@@ -25,6 +25,7 @@ class Row {
         return cells.map(cell => [
             cell.name,
             cell.description,
+            cell.color(),
             cell.startTimestamp(),
             cell.endTimestamp()
         ])
@@ -95,19 +96,30 @@ export class DrtMonitorRow extends Row {
         return this.getEventsByStatus(["start", "end"])
     }
 
+    drtDescription(nextEvent) {
+        if (nextEvent === undefined || nextEvent.status === 'end')
+            return 'Light on'
+
+        return 'Light lost'
+    }
+
     drtCells() {
         const name = 'DRT on';
-        const description = 'Light';
         const cells = [];
 
         const drtsOnEvents = this.drtsOnEvents();
 
         for (var i = 0; i < drtsOnEvents.length; i += 2) {
+
+            const nextEvent = drtsOnEvents[i + 1];
+
+            const description = this.drtDescription(nextEvent);
+
             const cell = new Cell({
                 name: name,
-                description: `${description} ${i / 2}`,
+                description: description,
                 startEvent: drtsOnEvents[i],
-                endEvent: drtsOnEvents[i + 1],
+                endEvent: nextEvent,
                 chart: this.chart
             });
 
@@ -154,12 +166,13 @@ export class PlayerActionRow extends Row {
     }
 
     playerActionCells() {
+
         const cells = this.events.map(
-            (event) => new Cell({
+            (event, index) => new Cell({
                 name: event.status,
                 description: event.status,
                 startEvent: event,
-                endEvent: event,
+                endEvent: this.events[index + 1],
                 chart: this.chart
             })
         );
