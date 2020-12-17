@@ -9,6 +9,7 @@ class HomeImage extends Component {
       <div className="Car">
           <img 
             className="CarImage"
+            alt="Front of a car"
             src={`${process.env.PUBLIC_URL}/car.svg`} />
       </div>
     );
