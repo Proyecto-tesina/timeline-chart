@@ -10,7 +10,7 @@ class PrimaryButton extends Component {
     // To access to component data we will need to bind "this" to the function
     handleClick(e) {
         e.preventDefault();
-        fetch("http://localhost:8000/launch-simulation").then(() => {
+        fetch("http://localhost:5000/start-simulation").then(() => {
             console.log("Ended simulation execution")
         })
     }
