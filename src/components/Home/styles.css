@@ -1,15 +1,52 @@
 .Home {
-    display: flex;
-    border-bottom-right-radius: 3em;
-    border-top-left-radius: 3em;
-    width: 40%;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: #1d3d5d;
-    height: 70%;
-    flex-direction: column;
+  display: flex;
+  border-bottom-right-radius: 3em;
+  border-top-left-radius: 3em;
+  width: 40%;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #1d3d5d;
+  height: 70%;
+  flex-direction: column;
 
-    box-shadow: #2c536b 0px 0px 20px;
-    -moz-box-shadow: #2c536b 0px 0px 20px;
-    -webkit-box-shadow: #2c536b 0px 0px 20px;
+  box-shadow: #2c536b 0px 0px 20px;
+  -moz-box-shadow: #2c536b 0px 0px 20px;
+  -webkit-box-shadow: #2c536b 0px 0px 20px;
 }
+
+.Car {
+  display: flex;
+  width: 100%;
+  height: 70%;
+}
+
+.CarImage {
+  width: 100%;
+  height: 100%;
+}
+
+.Links {
+  display: flex;
+  width: 100%;
+  height: 30%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.PrimaryLinks,
+.SecondaryLinks {
+  display: flex;
+  justify-content: space-around;
+  margin: 4px;
+}
+
+.PrimaryLinks {
+  width: 100%;
+  height: 40%;
+}
+
+.SecondaryLinks {
+  width: 100%;
+  height: 10%;
+}
+

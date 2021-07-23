@@ -1,36 +1,30 @@
-import React, { Component } from 'react';
+import React from "react";
 
-import './styles.css';
+import "./styles.css";
 
-import PaginationButton from '../PaginationButton/index.js'
-import ChartTitle from '../ChartTitle/index.js'
+import PaginationButton from "./PaginationButton/index.js";
+import ExperimentStatus from "./ExperimentStatus/index.js";
 
+function ChartHeader(props) {
+  const { experiment, previousUrl, nextUrl } = props;
 
-class ChartHeader extends Component {
+  return (
+    <div className="ChartHeader">
+      <PaginationButton
+        updateExperiment={props.updateExperiment}
+        url={previousUrl}
+        text="Previous"
+      />
 
-  render() {
-    const { experiment, previousUrl, nextUrl } = this.props;
+      <ExperimentStatus experiment={experiment} />
 
-    return (
-      <div className="ChartHeader">
-        <PaginationButton
-          updateExperiment={this.props.updateExperiment}
-          url={previousUrl}
-          text='Previous'
-        />
-
-        <ChartTitle
-          experiment={experiment}
-        />
-
-        <PaginationButton
-          updateExperiment={this.props.updateExperiment}
-          url={nextUrl}
-          text='Next'
-        />
-      </div>
-    );
-  }
+      <PaginationButton
+        updateExperiment={props.updateExperiment}
+        url={nextUrl}
+        text="Next"
+      />
+    </div>
+  );
 }
 
 export default ChartHeader;

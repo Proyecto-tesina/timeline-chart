@@ -1,7 +1,7 @@
 export class Cell {
     static colors = {
-            "Light lost" : "red",
-            "default" : "",
+        "Light lost": "red",
+        "default": "",
     };
 
     constructor({name, description, startEvent, endEvent, chart}) {
@@ -14,12 +14,27 @@ export class Cell {
     }
 
     color() {
-        const { description } = this;
-        const { colors } = Cell;
+        const {description} = this;
+        const {colors} = Cell;
 
         const hasColor = description in colors;
 
         return hasColor ? colors[description] : colors.default;
+    }
+
+    endTimestamp() {
+        const nowTimestamp = new Date();
+
+        if (!this.missingEndEvent())
+            return this.endEvent.timestamp;
+
+        if (this.chart.isFinished())
+            return this.chart.endTime()
+
+        if (this.timedOutStartEvent())
+            return this.startEvent.timestamp;
+
+        return nowTimestamp
     }
 
     missingEndEvent() {
@@ -27,32 +42,18 @@ export class Cell {
     }
 
     timedOutStartEvent() {
-        const nowTimestamp = new Date(Date.now());
+        const nowTimestamp = new Date();
         const timeout = 300000;
 
         return (nowTimestamp - this.startEvent.timestamp) > timeout
     }
 
-    endTimestamp() {
-        const nowTimestamp = new Date(Date.now());
-
-        if (!this.missingEndEvent())            
-            return this.endEvent.timestamp;
-
-        if (this.chart.isFinished())
-            return this.chart.endTime()
-        
-        if (this.timedOutStartEvent())
-            return this.startEvent.timestamp;
-
-        return nowTimestamp
-    }
 
     missingStartEvent() {
         return this.startEvent === undefined
     }
 
-    startTimestamp() { 
+    startTimestamp() {
         if (!this.missingStartEvent())
             return this.startEvent.timestamp;
 

@@ -1,30 +1,18 @@
-import React, { Component } from 'react';
+import React from "react";
 
-import './styles.css';
+import ChartContainer from "./ChartContainer/index.js";
+import "./styles.css";
 
-import Header from 'domain/Header/index.js'
-import Body from 'domain/Body/index.js'
-import H1 from 'domain/H1/index.js'
+function Statistics() {
+  return (
+    <div className="statistics-container">
+      <header>
+        <h1>Experiment statistics</h1>
+      </header>
 
-import ChartContainer from './ChartContainer/index.js'
-
-
-class Statistics extends Component {
-  render() {
-    return (
-      <div className="Stadistics">
-        <Header>
-          <H1>
-            Experiment statistics
-          </H1>
-        </Header>
-
-        <Body>
-          <ChartContainer />
-        </Body>
-      </div>
-    );
-  }
+      <ChartContainer />
+    </div>
+  );
 }
 
 export default Statistics;

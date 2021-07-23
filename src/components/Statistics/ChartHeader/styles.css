@@ -6,8 +6,11 @@
 	width: 100%;
 	background-color: #1d3557;
 	color: white;
+    margin-bottom: 10px;
 }
 
 .ChartButton {
-	margin: 4px;
+	margin: 4px 50px;
+    width: 200px;
+    height: 30px;
 }

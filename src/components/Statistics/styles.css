@@ -1,7 +1,43 @@
-.Stadistics {
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #a8dadc;
+  border-top-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+  width: 60%;
+  padding: 1em;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0px;
+  border-bottom: 1px solid #457a9d;
+  border-top: 1px solid #ff0461;
+  color: #1d3557;
+}
+
+.statistics-container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #f1faee;
+  border-bottom: 2em solid #1d3557;
+}
+
+.error-message {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  color: red;
 }

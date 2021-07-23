@@ -1,18 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './styles.css';
+import "./styles.css";
 
-import HomeImage from './HomeImage/index.js'
-import HomeLinks from './HomeLinks/index.js'
-
+import PrimaryButton from "./Buttons/PrimaryLink/index.js";
+import SecondaryLink from "./Buttons/SecondaryLink/index.js";
 
 class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <HomeImage />
+        <div className="Car">
+          <img
+            className="CarImage"
+            alt="Front of a car"
+            src={`${process.env.PUBLIC_URL}/car.svg`}
+          />
+        </div>
 
-        <HomeLinks />
+        <div className="Links">
+          <div className="PrimaryLinks">
+            <PrimaryButton value="START" />
+          </div>
+          <div className="SecondaryLinks">
+            {/* <SecondaryLink to="/configuration">Configuration</SecondaryLink> */}
+            <SecondaryLink to="/statistics">Statistics</SecondaryLink>
+          </div>
+        </div>
       </div>
     );
   }

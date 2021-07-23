@@ -1,0 +1,27 @@
+.ChartTitle {
+  text-align: center;
+  padding: 4px;
+}
+
+.ChartTitle > h2 {
+  margin: 2px;
+  font-size: 0.87em;
+  color: #efefef;
+}
+
+.ExperimentStatus {
+  color: #a8dadc;
+}
+
+.ExperimentStatus > .finished {
+  color: red;
+}
+
+.ExperimentStatus > .running {
+  color: #00ff00;
+}
+
+.ExperimentStatus > .pending {
+  color: white;
+}
+
